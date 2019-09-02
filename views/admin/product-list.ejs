@@ -1,0 +1,115 @@
+<%- include("./includes/head.ejs")%>
+
+<body>
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+            </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+                            <a class="has-arrow" href="index.html">
+								   <i class="fa big-icon fa-home icon-wrap"></i>
+								   <span class="mini-click-non">Control</span>
+								</a>
+                            <ul class="submenu-angle" aria-expanded="true">   
+                                <!-- <li><a title="User Detail" href="user-detail.html"><i class="fa fa-heart-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">User Detail</span></a></li> -->
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    
+                </div>
+            </div>
+        </div>
+        <%- include("./includes/header.ejs")%>
+        <div class="product-status mg-tb-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap">
+                            <h4>Products List</h4>
+                            <div class="add-product">
+                                <a href="/admin/add-product">Add Product</a>
+                            </div>
+                            <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Size</th>
+                                    <th>Create_at</th>
+                                    <th>Update_at</th>
+                                    <th>Delete_at</th>
+                                    <th>Setting</th>
+                                </tr>
+                                <% if(products.length > 0 ) {%>
+                                    <% products.forEach(p => { %>
+                                <tr>
+                                    <td> <%= p._id %> </td>
+                                    <td><img src="<%= p.imageUrl %>" alt="" /></td>
+                                    <td> <%= p.name %> </td>
+                                    <!-- <td>
+                                        <button class="pd-setting">Active</button>
+                                    </td> -->
+                                    <td> <%= p.category %> </td>
+                                    <td> <%= p.description %> </td>
+                                    <td> <%= p.price %> </td>
+                                    <td> <%= p.size %> </td>
+                        
+                                    <td> <%= p.create_at.toDateString() %> </td>
+                                    <td> <%= p.update_at == null ? "null" : p.update_at.toDateString() %> </td>
+                                    <td> <%= p.delete_at == null ? "null" : p.delete_at.toDateString() %> </td>
+                                    <td>
+
+                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
+                                            <a href="/admin/edit-product/<%= p._id %>?edit=true">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
+                                        </button>
+
+
+                                        <form action="/admin/delete-product" method="POST">
+                                            <button data-toggle="tooltip" type="submit" title="Trash" class="pd-setting-ed"><a><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+                                            <input type="hidden" name="productId" value="<%= p._id %>">    
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                <% } %>
+                            </table>
+                            </div>
+                            <div class="custom-pagination">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <%- include("./includes/footer.ejs")%>
+    </div>
+<%- include("./includes/end.ejs")%>

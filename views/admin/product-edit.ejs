@@ -1,0 +1,232 @@
+<%- include("./includes/head.ejs")%>
+<body>
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+            </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+                            <a class="has-arrow" href="index.html">
+								   <i class="fa big-icon fa-home icon-wrap"></i>
+								   <span class="mini-click-non">Control</span>
+								</a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                
+                                <!-- <li><a title="User Detail" href="user-detail.html"><i class="fa fa-heart-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">User Detail</span></a></li> -->
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <!-- <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include("./includes/header.ejs")%>
+        <!-- Single pro tab start-->
+        <div class="single-product-tab-area mg-tb-15">
+            <!-- Single pro tab review Start-->
+        <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>"  method="POST" enctype="multipart/form-data">
+            <div class="single-pro-review-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="review-tab-pro-inner">
+                                <ul id="myTab3" class="tab-review-design">
+                                    <li class="active"><a href="#description"><i class="fa fa-pencil" aria-hidden="true"></i><% if (editing) { %>Edit Product<% } else { %> Add Product<% } %></a></li>
+                                    <li><a href="#reviews"><i class="fa fa-file-image-o" aria-hidden="true"></i> Pictures</a></li>
+                                    <!-- <li><a href="#INFORMATION"><i class="fa fa-commenting" aria-hidden="true"></i> Review</a></li> -->
+                                </ul>
+                                <div id="myTabContent" class="tab-content custom-product-edit">
+                                    <div class="product-tab-list tab-pane fade active in" id="description">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="review-content-section">
+                                                    <div class="input-group mg-b-pro-edt">
+                                                        <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                        <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } %>" class="form-control" placeholder="Name">
+                                                    </div>
+                                                    <div class="input-group mg-b-pro-edt">
+                                                        <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                        <select class="form-control form-control-sm">
+                                                            <% if (editing) { %>
+                                                                <option><%= product.category %></option>
+                                                            <% } %>
+                                                                <% list_cate.forEach(p=>{ %>
+                                                                <option><%= p %></option>
+                                                                <% }) %>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                    <div class="input-group mg-b-pro-edt">
+                                                        <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                        <input type="text" name="description" id="description" value="<% if (editing) { %><%= product.description %><% } %>" class="form-control" placeholder="Description">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">   
+                                                <div class="review-content-section">
+                                                        <div class="input-group mg-b-pro-edt">
+                                                                <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                                                                <input type="number" name="price" id="price" value="<% if (editing) { %><%= product.price %><% } %>" class="form-control" placeholder="Price">
+                                                            </div>
+                                                        <div class="input-group mg-b-pro-edt">
+                                                                <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                                <input type="text" name="size" id="size" value="<% if (editing) { %><%= product.size %><% } %>" class="form-control" placeholder="Size">
+                                                            </div>
+                                                        <div class="input-group mg-b-pro-edt">
+                                                        <span class="input-group-addon"><i class="fa fa-eraser" aria-hidden="true"></i></span>
+                                                        <input type="text" name="delete_at" id="delete_at" value="<% if (editing) { %> <%= product.delete_at == null ? '' : product.delete_at.toDateString() %> <% }  %>" class="form-control" placeholder="Delete_At">
+                                                        <input type="hidden" value="<% if (editing) { %><%= product._id %><% } %>%>" name="productId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="text-center mg-b-pro-edt custom-pro-edt-ds">
+                                                        <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">Save
+                                                        </button>
+                                                        <button class="btn btn-warning waves-effect waves-light"><a href="/admin/products">Discard</a></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-tab-list tab-pane fade" id="reviews">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="review-content-section">
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="pro-edt-img">
+                                                                    <img src="
+                                                                    <% if (editing) { %> 
+                                                                        <%= product.imageUrl == null ? 'https://ucarecdn.com/5d276379-552f-4a08-97e7-744a15f71477/ava.png' : product.imageUrl %> 
+                                                                        <% } else { %>
+                                                                           <%= 'https://ucarecdn.com/5d276379-552f-4a08-97e7-744a15f71477/ava.png'
+                                                                           %>
+                                                                        <% } %>   
+                                                                            " alt="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                        <div class="product-edt-pix-wrap">
+                                                                                <div class="input-group">
+                                                                                    <div class="custom-file">
+                                                                                        <input type="file" class="custom-file-input" name="image" id="image">
+                                                                                        
+                                                                                        <label class="custom-file-label" for="customFileLangHTML" data-browse="Bestand kiezen">Upload avata</label>
+                                                                                      </div>
+                                                                                </div>
+                                                                                <div class="row">                             
+                                                                                    <div class="col-lg-12">
+                                                                                        <div class="product-edt-remove" style="display: inline-block;">
+                                                                                            <button type="submit" class="btn btn-danger waves-effect waves-light">Upload
+                                                                                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <% if (editing) { %>
+                                                                                        <div class="product-edt-remove" style="display: inline-block;">
+                                                                                            <button type="submit" class="btn btn-danger waves-effect waves-light">Remove
+                                                                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                                                                </button>
+                                                                                        </div>
+                                                                                        <% } %>
+                                                                                    </div>
+        
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="review-content-section">
+                                                    <div class="card-block">
+                                                        <div class="text-muted f-w-400">
+                                                            <p>No reviews yet.</p>
+                                                        </div>
+                                                        <div class="m-t-10">
+                                                            <div class="txt-primary f-18 f-w-600">
+                                                                <p>Your Rating</p>
+                                                            </div>
+                                                            <div class="stars stars-example-css detail-stars">
+                                                                <div class="review-rating">
+                                                                    <fieldset class="rating">
+                                                                        <input type="radio" id="star5" name="rating" value="5">
+                                                                        <label class="full" for="star5"></label>
+                                                                        <input type="radio" id="star4half" name="rating" value="4 and a half">
+                                                                        <label class="half" for="star4half"></label>
+                                                                        <input type="radio" id="star4" name="rating" value="4">
+                                                                        <label class="full" for="star4"></label>
+                                                                        <input type="radio" id="star3half" name="rating" value="3 and a half">
+                                                                        <label class="half" for="star3half"></label>
+                                                                        <input type="radio" id="star3" name="rating" value="3">
+                                                                        <label class="full" for="star3"></label>
+                                                                        <input type="radio" id="star2half" name="rating" value="2 and a half">
+                                                                        <label class="half" for="star2half"></label>
+                                                                        <input type="radio" id="star2" name="rating" value="2">
+                                                                        <label class="full" for="star2"></label>
+                                                                        <input type="radio" id="star1half" name="rating" value="1 and a half">
+                                                                        <label class="half" for="star1half"></label>
+                                                                        <input type="radio" id="star1" name="rating" value="1">
+                                                                        <label class="full" for="star1"></label>
+                                                                        <input type="radio" id="starhalf" name="rating" value="half">
+                                                                        <label class="half" for="starhalf"></label>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-group mg-b-15 mg-t-15">
+                                                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                                            <input type="text" class="form-control" placeholder="User Name">
+                                                        </div>
+                                                        <div class="input-group mg-b-15">
+                                                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                                            <input type="text" class="form-control" placeholder="Last Name">
+                                                        </div>
+                                                        <div class="input-group mg-b-15">
+                                                            <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+                                                            <input type="text" class="form-control" placeholder="Email">
+                                                        </div>
+                                                        <div class="form-group review-pro-edt">
+                                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit
+																</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+        <%- include("./includes/footer.ejs")%>
+    </div>
+<%- include("./includes/end.ejs")%>

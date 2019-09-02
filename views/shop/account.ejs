@@ -1,0 +1,195 @@
+<%- include('../includes/head.ejs') %>
+<body class="animsition">
+	<%- include('../includes/header.ejs') %>
+
+	<%- include('../includes/cart-r-side.ejs') %>	
+
+
+	<!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+		<h2 class="ltext-105 cl0 txt-center">
+			Your Account
+		</h2>
+	</section>	
+
+
+	<!-- Content page -->
+	<section class="bg0 p-t-104 p-b-116">
+            
+            <div class="container">
+                    <% if (errorMessage) { %>
+                        <div class="user-message user-message--error m-b-20"><%= errorMessage %></div>
+                    <% } %>
+                <div class="flex-w flex-tr">
+                    <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+                        <form method="POST" action="/account">
+                            <h3 class="mtext-105 cl2 txt-center p-b-30">
+                                Change Password
+                            </h3>
+                            <span class="mtext-110 cl2 ">
+                                    Email
+                            </span>
+                            <div class="bor8 m-b-20 how-pos4-parent">
+                                <input type="email" class="stext-110 cl2 plh3 size-112 p-l-10 p-r-10 w-full" name="email">
+                            </div>
+                            <span class="mtext-110 cl2 ">
+                                    Old Password
+                            </span>
+                            <div class="bor8 m-b-20 how-pos4-parent">
+                                <input type="password" class="stext-110 cl2 plh3 size-112 p-l-10 p-r-10 w-full" name="oldpass">                      
+                            </div>
+                            <span class="mtext-110 cl2 ">
+                                    New Password
+                            </span>
+                            <div class="bor8 m-b-20 how-pos4-parent">
+                                <input type="password" class="stext-110 cl2 plh3 size-112 p-l-10 p-r-10 w-full" name="newpass">                      
+                            </div>
+                            <span class="mtext-110 cl2 ">
+                                    Rewrite New Password
+                            </span>
+                            <div class="bor8 m-b-20 how-pos4-parent">
+                                <input type="password" class="stext-110 cl2 plh3 size-112 p-l-10 p-r-10 w-full" name="renewpass">                      
+                            </div>
+                            
+                            <form>
+                            <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                                Change
+                            </button>
+                            <input type="hidden" name="kindChange" value="pw">
+                            </form>
+                        </form>
+                    </div>
+                    
+                    <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+                        <form method="POST" action="/account" enctype="multipart/form-data">
+                        <h4 class="mtext-105 cl2 txt-center p-b-30">
+                                    Your Information
+                        </h4>
+                        <div class="size-212 p-t-2">
+                            
+                                <div class="row">
+                              <div class="file-field">
+                                  <div class="row">
+                                <div class="mb-4 col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                                  <img src="<%= user.imageUrl == null ? 'https://ucarecdn.com/5d276379-552f-4a08-97e7-744a15f71477/ava.png' : user.imageUrl %>"
+                                    class="avatar-pic" alt="" style="width: 60%;">
+                                </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                  <div class="btn btn-mdb-color btn-rounded float-left">
+                                    <input type="file" name="image" id="image">
+                                  </div>
+                                </div>
+
+                                <div class="product-edt-remove" style="display:block; text-align: center; margin-bottom: 20%;">
+                                    <button type="submit" class="btn btn-danger waves-effect waves-light">Upload
+                                            <i class="fa fa-upload" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-danger waves-effect waves-light">Remove
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                              </div>
+                           
+                        </div>
+                       
+                        <div class="flex-w w-full p-b-30">
+                            <span class="fs-18 cl5 txt-center size-211">
+                                <span class="lnr lnr-map-marker"></span>
+                            </span>
+                            
+                            <div class="size-212 p-t-2">
+                                <span class="mtext-110 cl2">
+                                    Address
+                                </span>
+                                
+                                <div class="stext-115 cl1 size-200 p-t-18">
+                                    <input class="form-control" type="text" name = "address" value="<%= currentUser.address %>">
+                                  </div>       
+                            </div>
+                            
+                            
+                        </div>
+    
+                        <div class="flex-w w-full p-b-30">
+                            <span class="fs-18 cl5 txt-center size-211">
+                                <span class="lnr lnr-phone-handset"></span>
+                            </span>
+    
+                            <div class="size-212 p-t-2">
+                                <span class="mtext-110 cl2">
+                                    Telephone Number
+                                </span>
+    
+                                <div class="stext-115 cl1 size-200 p-t-18">
+                                    <input class="form-control" type="text" name = "phone" value="<%= currentUser.phone %>">
+                                </div>
+                                
+                            </div>
+                        </div>
+    
+                        <div class="flex-w w-full p-b-30">
+                            <span class="fs-18 cl5 txt-center size-211">
+                                <span class="fa fa-birthday-cake" aria-hidden="true"></span>
+                            </span>
+    
+                            <div class="size-212 p-t-2">
+                                <span class="mtext-110 cl2">
+                                    Birthday
+                                </span>
+    
+                                <div class="stext-115 cl1 size-200 p-t-18">
+                                    <input class="form-control" type="text" name = "birthday" value="<%= currentUser.birthday %>">
+                                </div>
+                                
+                            </div>
+                        </div>
+    
+                        <div class="flex-w w-full p-b-30">
+                            <span class="fs-18 cl5 txt-center size-211">
+                                <span class="lnr lnr-envelope"></span>
+                            </span>
+    
+                            <div class="size-212 p-t-2">
+                                <span class="mtext-110 cl2">
+                                    Email
+                                </span>
+    
+                                <div class="stext-115 cl1 size-200 p-t-18">
+                                    <input class="form-control" type="text" name = "email2" value="<%= currentUser.email %>" >
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <form >
+                        <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                            Change
+                        </button>
+                        <input type="hidden" name="kindChange" value="if">
+                        </form>
+                    </form>
+                    </div>
+                
+                </div>
+            </div>
+            
+    </section>
+	
+	
+	<!-- Map -->
+	<div class="map">
+		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
+	</div>
+
+	<%- include('../includes/footer.ejs') %>			
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+	
+	<%- include('../includes/modal.ejs') %>
+<%- include('../includes/end.ejs') %>

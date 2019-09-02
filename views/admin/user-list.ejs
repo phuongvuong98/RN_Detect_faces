@@ -1,0 +1,114 @@
+<%- include("./includes/head.ejs")%>
+<body>
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+                            <a class="has-arrow" href="/">
+								   <i class="fa big-icon fa-home icon-wrap"></i>
+								   <span class="mini-click-non">Control</span>
+								</a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <!-- <li><a title="User Detail" href="user-detail.html"><i class="fa fa-heart sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">User Detail</span></a></li> -->
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include("./includes/header.ejs")%>
+
+        <div class="product-status mg-tb-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap">
+                            <h4>Users List</h4>
+                            <div class="add-product">
+                                <!-- <a href="/admin/edit-user">Add user</a> -->
+                            </div>
+                            <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Image</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Address</th>
+                                    <th>Birthday</th>
+                                    <th>Phone</th>
+                                    <th>Role</th>
+                                    <th>Create_at</th>
+                                    <th>Update_at</th>
+                                    <th>Delete_at</th>
+                                    <th>Setting</th>
+                                </tr>
+                               
+                                <% if(users.length > 0 ) {%>
+                                <% users.forEach(user => { %>
+                                <tr>
+                                    <td> <%= user._id %> </td>
+                                    <td><img src="<%= user.imageUrl == null ? 'https://ucarecdn.com/5d276379-552f-4a08-97e7-744a15f71477/ava.png' : user.imageUrl %>" alt="" /></td>
+                                    <td> <%= user.email %> </td>
+                                    <td> <%= user.password %> </td>
+                                    <td> <%= user.address == null ? "null" : user.address %> </td>
+                                    <td> <%= user.birthday == null ? "null" : user.birthday %> </td>
+                                    <td> <%= user.phone == null ? "null" : user.phone %> </td>
+                                    <td> <%= user.role %> </td>
+                                    <td> <%= user.create_at.toDateString() %> </td>
+                                    <td> <%= user.update_at == null ? "null" : user.update_at.toDateString() %> </td>
+                                    <td> <%= user.delete_at == null ? "null" : user.delete_at.toDateString() %> </td>
+                                    <td>
+                                            
+                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
+                                            <a href="/admin/edit-user/<%= user._id %>">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+                                        </button>
+
+                                        <form action="/admin/deleteUser" method="POST">
+                                        <button data-toggle="tooltip" type="submit" title="Trash" class="pd-setting-ed"><a><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+                                        <input type="hidden" name="userId" value="<%= user._id %>">    
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                <% } %>
+                               
+                            </table>
+                        </div>
+                            <div class="custom-pagination">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include("./includes/footer.ejs")%>
+    </div>
+<%- include("./includes/end.ejs")%>

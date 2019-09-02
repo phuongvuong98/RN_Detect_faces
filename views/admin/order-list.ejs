@@ -1,0 +1,86 @@
+<%- include("./includes/head.ejs")%>
+
+<body>
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+            </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+                            <a class="has-arrow" href="index.html">
+								   <i class="fa big-icon fa-home icon-wrap"></i>
+								   <span class="mini-click-non">Control</span>
+								</a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                
+                                <!-- <li><a title="User Detail" href="user-detail.html"><i class="fa fa-heart-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">User Detail</span></a></li> -->
+                                
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    
+                </div>
+            </div>
+        </div>
+        <%- include("./includes/header.ejs")%>
+        <div class="product-status mg-tb-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap">
+                            <h4>Order List</h4>
+                            <div class="add-product" style="display: none">
+                                <a href="/admin/add-product">Add Product</a>
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>Index</th>
+                                    <th>Order - Product/Quanity</th>
+                                    <th>Sum Price</th>
+                                    <th>User</th>
+                                </tr>
+                                <% orders.filter(order => order.sumPrice > 0).forEach((item, idx) => { %>
+                                    <tr>
+                                        <td><%= idx + 1 %></td>
+                                        <td>
+                                            <% item.itemsOrder.forEach(itemOrder => { %>
+                                                Product ID: <a target="_blank" href="/products/<%= itemOrder.productId %>"><%= itemOrder.productId %></a> , Quantity: <%= itemOrder.quantity %> <br>
+                                            <% }) %>
+                                        </td>
+                                        <td>$<%= item.sumPrice %></td>
+                                        <td> <%= item.user %> </td>
+                                    </tr>
+                                <% }) %>
+                            </table>
+                            <div class="custom-pagination">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <%- include("./includes/footer.ejs")%>
+    </div>
+<%- include("./includes/end.ejs")%>
